@@ -1,18 +1,18 @@
 const board = [
-    [' ', 'X', 'O'],
-    ['O', 'X', 'O'],
-    ['X', ' ', 'O']
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
 ]
 
 const game = {
-    id: 1,
+    id: -1,
     board
 }
 
 const action = {
-    playerId: 1,
-    x: 0, 
-    y: 2
+    playerId: -1,
+    x: -1, 
+    y: -1
 }
 
 module.exports = board
