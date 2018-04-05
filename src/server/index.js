@@ -28,6 +28,31 @@ app.post("/action", (req, res) => {
     let x = action.x
     let y = action.y
 
+    if (playerId != prevPlayerId && playerId >= 0 && playerId <= 1 && x >= 0 && x <= 2 && y >= 0 && y <= 2) {
+        if (board[x][y] == '') {
+            switch(playerId) {
+                case 0: 
+                    board[x][y] = 'X'
+                    break
+                case 1:
+                    board[x][y] = 'O'
+                    break
+                default: 
+                    board[x][y] = ''
+                    break
+            }
+            if (!checkWin(playerId)) {
+                prevPlayerId = playerId
+                res.send('Seems fine! (but you did not win...)' + JSON.stringify(action))
+            } else {
+                res.send('Player with id: ' + playerId + ' won!')
+            }
+        } else {
+            res.send('This board position is already in use ' + JSON.stringify(action))
+        }
+    } else {
+        res.send('Your request seems invalid ' + JSON.stringify(action))
+    }
 })
 
 app.listen(port, err => {
