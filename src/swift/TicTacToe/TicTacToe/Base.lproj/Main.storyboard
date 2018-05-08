@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCc-22-812" customClass="TicTacToeView" customModule="TicTacToe" customModuleProvider="target">
+                                <rect key="frame" x="37.5" y="193.5" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="cZg-CV-g7m"/>
+                                    <constraint firstAttribute="height" constant="300" id="hf6-cC-sNC"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="uuj-MB-tfZ" appends="YES" id="8qL-fF-H2r"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Iu-x2-f7M">
+                                <rect key="frame" x="93" y="98" width="189" height="30"/>
+                                <state key="normal" title="Re-load board via REST API"/>
+                                <connections>
+                                    <action selector="getFieldStatusFromRest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h4h-4h-EFd"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79S-g7-OdZ">
+                                <rect key="frame" x="93" y="46" width="189" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nCc-22-812" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="8Hi-eH-73w"/>
+                            <constraint firstItem="79S-g7-OdZ" firstAttribute="top" secondItem="6Iu-x2-f7M" secondAttribute="bottom" constant="10" id="E2o-T9-Ebb"/>
+                            <constraint firstItem="nCc-22-812" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Qfm-C1-b3w"/>
+                            <constraint firstItem="79S-g7-OdZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YkX-Z5-THs"/>
+                            <constraint firstItem="6Iu-x2-f7M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="ii0-7g-rto"/>
+                            <constraint firstItem="6Iu-x2-f7M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k5Q-KB-48m"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="TicTacToeView" destination="nCc-22-812" id="U4K-eK-7Ez"/>
+                        <outlet property="resp" destination="79S-g7-OdZ" id="Mlu-id-rj0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uuj-MB-tfZ">
+                    <connections>
+                        <action selector="onTap:" destination="BYZ-38-t0r" id="GRH-EX-6Ef"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
+        </scene>
+    </scenes>
+</document>

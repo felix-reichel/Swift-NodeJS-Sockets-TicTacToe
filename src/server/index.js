@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 
 let prevPlayerId = -99
 
-let board = [
+let fieldStatus = [
     ['', '', ''],
     ['', '', ''],
     ['', '', '']
@@ -19,7 +19,7 @@ app.get('/version', (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.json({ board })
+    res.json({ fieldStatus })
 })
 
 app.post("/action", (req, res) => {
@@ -29,16 +29,16 @@ app.post("/action", (req, res) => {
     let y = action.y
 
     if (playerId != prevPlayerId && playerId >= 0 && playerId <= 1 && x >= 0 && x <= 2 && y >= 0 && y <= 2) {
-        if (board[x][y] == '') {
+        if (fieldStatus[x][y] == '') {
             switch(playerId) {
                 case 0: 
-                    board[x][y] = 'X'
+                    fieldStatus[x][y] = 'X'
                     break
                 case 1:
-                    board[x][y] = 'O'
+                    fieldStatus[x][y] = 'O'
                     break
                 default: 
-                    board[x][y] = ''
+                    fieldStatus[x][y] = ''
                     break
             }
             if (!checkWin(playerId)) {
@@ -48,9 +48,10 @@ app.post("/action", (req, res) => {
                 res.send('Player with id: ' + playerId + ' won!')
             }
         } else {
-            res.send('This board position is already in use ' + JSON.stringify(action))
+            res.send('This fieldStatus position is already in use ' + JSON.stringify(action))
         }
     } else {
+        console.log('invalid req: ' + JSON.stringify(action))
         res.send('Your request seems invalid ' + JSON.stringify(action))
     }
 })
@@ -70,7 +71,7 @@ function checkWin(playerId) {
     for (let i = 0; i <= 2; i++) {
         let horizontal = true
         for (let j = 0; j <= 2; j++) {
-            if (board[i][j] != lastPlayerSign ) {
+            if (fieldStatus[i][j] != lastPlayerSign ) {
                 horizontal = false
             } 
         }
@@ -82,7 +83,7 @@ function checkWin(playerId) {
     for (let j = 0; j <= 2; j++) {
         let vertical = true
         for (let i = 0; i <= 2; i++) {
-            if (board[i][j] != lastPlayerSign ) {
+            if (fieldStatus[i][j] != lastPlayerSign ) {
                 vertical = false
             } 
         }
@@ -95,8 +96,8 @@ function checkWin(playerId) {
     let diagonal2 = true 
 
     for (let i = 0; i <= 2; i++) {
-        if (board[i][2 - i] != lastPlayerSign ) { diagonal1 = false }
-        if (board[2 - i][i] != lastPlayerSign ) { diagonal2 = false }
+        if (fieldStatus[i][2 - i] != lastPlayerSign ) { diagonal1 = false }
+        if (fieldStatus[2 - i][i] != lastPlayerSign ) { diagonal2 = false }
     }
     
     if (diagonal1 || diagonal2) {
